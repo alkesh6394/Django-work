@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'app',
     'authentication',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +133,21 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'authentication.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60, hours=1),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=7),
+    'SLIDING_TOKEN_REFRESH_LIFETIME_LAMBDA': None,
+    'SLIDING_TOKEN_LIFETIME_LAMBDA': None,
+    'SLIDING_TOKEN_REFRESH_COMPENSATION': timedelta(minutes=5),
+    'SLIDING_TOKEN_REFRESH_COMPENSATION_LAMBDA': None,
+}

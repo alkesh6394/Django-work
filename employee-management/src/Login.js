@@ -14,9 +14,6 @@ const Login = ({ setLoggedIn }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Verify formData values
-    console.log(formData);
-
     fetch('http://localhost:8000/api/login/', {
       method: 'POST',
       headers: {
@@ -28,8 +25,10 @@ const Login = ({ setLoggedIn }) => {
     .then(data => {
       console.log('Login Response:', data);
 
-      if (data.message === "Login successful") {
+      if (data.access_token) {
         setLoggedIn(true);
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
       } else {
         alert('Invalid email or password');
       }
