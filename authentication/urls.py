@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import LoginView
+from .views import LoginView, LogoutView, RegisterView
 
 urlpatterns = [
+    # Define URL patterns for the login, logout, and registration views
     path('login/', LoginView.as_view(), name='login'),
-    # Add other URL patterns as needed.
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('register/', RegisterView.as_view(), name='register'),
 ]
